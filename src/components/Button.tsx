@@ -1,6 +1,6 @@
 type TitleButtonType = {
 	title: string
-	onClick: () => void
+	onClick?: () => void
 	activeButton?: boolean
 }
 export const Button = ({ title, onClick, activeButton }: TitleButtonType) => {
