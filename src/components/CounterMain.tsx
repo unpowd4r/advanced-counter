@@ -1,17 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v1 } from 'uuid'
 import { Button } from './Button'
 
 type InputValuesType = {
 	maxValue: number
 	startValue: number
+	enterValues: string
 }
 
-export const CounterMain = ({ maxValue, startValue }: InputValuesType) => {
+export const CounterMain = ({
+	maxValue,
+	startValue,
+	enterValues,
+}: InputValuesType) => {
 	let [count, setCount] = useState(startValue)
 
+	useEffect(() => {
+		setCount(startValue)
+	}, [startValue])
+
 	const incrementCounter = () => {
-		if (count < maxValue && maxValue !== 0) {
+		if (count < maxValue && maxValue !== startValue) {
 			setCount(count + 1)
 		}
 	}
@@ -40,7 +49,9 @@ export const CounterMain = ({ maxValue, startValue }: InputValuesType) => {
 	return (
 		<div className='counter__window'>
 			<div className='counter__background'>
-				<h1 className={count === maxValue ? 'redCounter' : ''}>{count}</h1>
+				<h1 className={count === maxValue ? 'redCounter' : 'count'}>
+					{enterValues === '' ? count : enterValues}
+				</h1>
 			</div>
 			<div className='buttons__items'>
 				{buttonData.map(t => (

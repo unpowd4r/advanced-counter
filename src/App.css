@@ -25,7 +25,8 @@
 	border-radius: 15px;
 
 	h1 {
-		font-size: 100px;
+		text-align: center;
+		font-size: 40px;
 	}
 }
 
@@ -46,8 +47,25 @@
 .counter__start__values {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
 	gap: 20px;
+}
+
+.counter__windows {
+	min-width: 535px;
+	min-height: 435px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	gap: 30px;
+
+	border: 2px solid rgb(0, 204, 255);
+	border-radius: 10px;
 }
 
 .values_values {
@@ -57,9 +75,24 @@
 	gap: 40px;
 }
 
+.inputs__values {
+	min-width: 90%;
+	min-height: 200px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	border: 2px solid rgb(0, 204, 255);
+	border-radius: 10px;
+
+	gap: 20px;
+}
 .input__max__value {
 	text-align: center;
 	direction: none;
+
+	font-size: 18px;
 
 	border: 4px solid rgb(0, 204, 255);
 	border-radius: 10px;
@@ -73,11 +106,28 @@ input:focus {
 .input__start__value {
 	text-align: center;
 	direction: none;
+	font-size: 18px;
 
 	height: 30px;
 
 	border: 4px solid rgb(0, 204, 255);
 	border-radius: 10px;
+}
+
+.incorrect-value {
+	text-align: center;
+	direction: none;
+	font-size: 18px;
+
+	height: 30px;
+
+	border: 4px solid rgb(255, 17, 0);
+	border-radius: 10px;
+	background-color: rgb(255, 73, 73);
+
+	&:focus {
+		outline: 3px solid rgb(253, 99, 88);
+	}
 }
 
 .counter__text {
@@ -101,16 +151,44 @@ input:focus {
 	border-radius: 15px;
 }
 
-.button {
+.button__item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	outline: none;
 
-	height: 60%;
-	width: 40%;
+	min-width: 500px;
+	min-height: 150px;
 
 	color: rgb(87, 87, 87);
 
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	font-weight: 700px;
+	font-size: 40px;
+
+	border: none;
+	border-radius: 15px;
+	border: 2px solid rgb(0, 204, 255);
+
+	cursor: pointer;
+
+	&:active {
+		background-color: rgb(61, 60, 60);
+		color: rgb(0, 204, 255);
+		border: 2px solid rgb(0, 204, 255);
+	}
+}
+
+.button {
+	outline: none;
+
+	min-height: 80px;
+	min-width: 40%;
+
+	color: rgb(87, 87, 87);
+
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	font-size: 40px;
 
 	background-color: rgb(0, 204, 255);
@@ -127,8 +205,8 @@ input:focus {
 }
 
 .disabled {
-	height: 60%;
-	width: 40%;
+	min-height: 80px;
+	min-width: 200px;
 
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	font-weight: 700px;

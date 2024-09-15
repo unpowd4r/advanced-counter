@@ -1,14 +1,25 @@
 import { useState } from 'react'
-import { Button } from './Button'
 import { InputsValue } from './InputValue'
 
 type SetValuesType = {
-	changeSetHandler: (valueMax: number, valueStart: number) => void
+	changeSetHandlerMaxValue: (valueMax: number) => void
+	changeSetHandlerStartValue: (valueStart: number) => void
+	textValuesCounterUnCorrect: () => void
+	textValuesOnBlurUnCorrectHandler: () => void
 	maxValue: number
 	startValue: number
+	enterValues: string
 }
 
-export const SetCounterMain = ({ changeSetHandler }: SetValuesType) => {
+export const SetCounterMain = ({
+	changeSetHandlerStartValue,
+	changeSetHandlerMaxValue,
+	textValuesCounterUnCorrect,
+	textValuesOnBlurUnCorrectHandler,
+	enterValues,
+	maxValue,
+	startValue,
+}: SetValuesType) => {
 	const [valueMax, setValueMax] = useState(0)
 	const [valueStart, setValueStart] = useState(0)
 
@@ -21,21 +32,23 @@ export const SetCounterMain = ({ changeSetHandler }: SetValuesType) => {
 	}
 
 	const setUpdateValuesHandler = () => {
-		changeSetHandler(valueMax, valueStart)
+		changeSetHandlerMaxValue(valueMax)
+		changeSetHandlerStartValue(valueStart)
 	}
 
 	return (
 		<div>
-			<div className='counter__window'>
-				<div className='counter__background'>
-					<InputsValue
-						onChangeUpdateMaxValues={onChangeUpdateMaxValues}
-						onChangeUpdateStartValues={onChangeUpdateStartValues}
-					/>
-				</div>
-				<div className='buttons__items'>
-					<Button title={'set'} onClick={setUpdateValuesHandler} />
-				</div>
+			<div className='counter__windows'>
+				<InputsValue
+					textValuesOnBlurUnCorrectHandler={textValuesOnBlurUnCorrectHandler}
+					onChangeUpdateMaxValues={onChangeUpdateMaxValues}
+					onChangeUpdateStartValues={onChangeUpdateStartValues}
+					setUpdateValuesHandler={setUpdateValuesHandler}
+					textValuesCounterUnCorrect={textValuesCounterUnCorrect}
+					enterValues={enterValues}
+					maxValue={maxValue}
+					startValue={startValue}
+				/>
 			</div>
 		</div>
 	)
