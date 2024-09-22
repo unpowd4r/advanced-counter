@@ -23,7 +23,7 @@ function App() {
 		let startValueAsString = localStorage.getItem(START_VALUE)
 		if (startValueAsString) {
 			let newStartValue = JSON.parse(startValueAsString)
-			setMaxValues(newStartValue)
+			setStartValues(newStartValue)
 		}
 	}, [])
 

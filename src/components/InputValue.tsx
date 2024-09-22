@@ -7,9 +7,11 @@ type OnChangeValuesType = {
 	setUpdateValuesHandler: () => void
 	textValuesCounterUnCorrect: () => void
 	textValuesOnBlurUnCorrectHandler: () => void
+	setClickedHandler: () => void
 	enterValues: string
 	maxValue: number
 	startValue: number
+	clicked: number
 }
 
 export const InputsValue = ({
@@ -21,16 +23,11 @@ export const InputsValue = ({
 	enterValues,
 	maxValue,
 	startValue,
+	setClickedHandler,
+	clicked,
 }: OnChangeValuesType) => {
 	const [maxValues, setMaxValues] = useState(maxValue)
 	const [startValues, setStartValues] = useState(startValue)
-
-	const disabledButton =
-		maxValues > startValues &&
-		maxValues > -1 &&
-		startValues !== maxValues &&
-		startValues > -1 &&
-		startValues !== maxValues
 
 	useEffect(() => {
 		const maxValueFromLocalStorage = localStorage.getItem('maxValue')
@@ -46,29 +43,40 @@ export const InputsValue = ({
 
 	const onChangeInputMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		let targetVal = parseInt(e.currentTarget.value)
+
 		if (!isNaN(targetVal)) {
 			setMaxValues(targetVal)
 			onChangeUpdateMaxValues(targetVal)
 		} else {
-			setMaxValues(0)
+			// setMaxValues(0)
 			onChangeUpdateMaxValues(0)
 		}
 	}
 
 	const onChangeInputStartHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		let targetVal = parseInt(e.currentTarget.value)
+
 		if (!isNaN(targetVal)) {
 			setStartValues(targetVal)
 			onChangeUpdateStartValues(targetVal)
 		} else {
-			setStartValues(0)
+			// setStartValues(0)
 			onChangeUpdateStartValues(0)
 		}
 	}
 
 	const textValuesCounterUnCorrectHandler = () => {
 		textValuesCounterUnCorrect()
+		setClickedHandler()
 	}
+
+	const disabledButton =
+		clicked !== 1 &&
+		maxValues > startValues &&
+		maxValues > -1 &&
+		startValues !== maxValues &&
+		startValues > -1 &&
+		startValues !== maxValues
 
 	return (
 		<>

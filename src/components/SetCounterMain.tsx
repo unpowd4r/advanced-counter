@@ -22,6 +22,7 @@ export const SetCounterMain = ({
 }: SetValuesType) => {
 	const [valueMax, setValueMax] = useState(0)
 	const [valueStart, setValueStart] = useState(0)
+	const [clicked, setClicked] = useState(0)
 
 	const onChangeUpdateMaxValues = (maxValue: number) => {
 		setValueMax(maxValue)
@@ -34,6 +35,11 @@ export const SetCounterMain = ({
 	const setUpdateValuesHandler = () => {
 		changeSetHandlerMaxValue(valueMax)
 		changeSetHandlerStartValue(valueStart)
+		setClicked(1)
+	}
+
+	const setClickedHandler = () => {
+		setClicked(0)
 	}
 
 	return (
@@ -48,6 +54,8 @@ export const SetCounterMain = ({
 					enterValues={enterValues}
 					maxValue={maxValue}
 					startValue={startValue}
+					setClickedHandler={setClickedHandler}
+					clicked={clicked}
 				/>
 			</div>
 		</div>
