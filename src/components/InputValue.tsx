@@ -103,7 +103,7 @@ export const InputsValue = ({
 					<input
 						className={
 							maxValues > startValues &&
-							maxValues > -1 &&
+							startValues > -1 &&
 							startValues !== maxValues
 								? 'input__start__value'
 								: 'incorrect-value'

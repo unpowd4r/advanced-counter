@@ -37,11 +37,11 @@ function App() {
 
 	const changeSetHandlerMaxValue = (valueMax: number) => {
 		setMaxValues(valueMax)
-		localStorage.setItem(MAX_VALUE, JSON.stringify(maxValue))
+		localStorage.setItem(MAX_VALUE, JSON.stringify(valueMax))
 	}
 	const changeSetHandlerStartValue = (valueStart: number) => {
 		setStartValues(valueStart)
-		localStorage.setItem(START_VALUE, JSON.stringify(startValue))
+		localStorage.setItem(START_VALUE, JSON.stringify(valueStart))
 	}
 
 	return (
