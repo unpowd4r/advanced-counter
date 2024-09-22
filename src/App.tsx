@@ -4,7 +4,7 @@ import { CounterMain } from './components/CounterMain'
 import { SetCounterMain } from './components/SetCounterMain'
 
 function App() {
-	const [maxValue, setMaxValues] = useState(5)
+	const [maxValue, setMaxValues] = useState(0)
 	const [startValue, setStartValues] = useState(0)
 	const [enterValues, setEnterValues] = useState('')
 
