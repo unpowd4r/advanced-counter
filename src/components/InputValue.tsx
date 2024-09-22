@@ -44,25 +44,25 @@ export const InputsValue = ({
 	const onChangeInputMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		let targetVal = parseInt(e.currentTarget.value)
 
-		if (!isNaN(targetVal)) {
-			setMaxValues(targetVal)
-			onChangeUpdateMaxValues(targetVal)
-		} else {
-			// setMaxValues(0)
-			onChangeUpdateMaxValues(0)
-		}
+		// if (!isNaN(targetVal)) {
+		setMaxValues(targetVal)
+		onChangeUpdateMaxValues(targetVal)
+		// } else {
+		// 	// setMaxValues(0)
+		// 	onChangeUpdateMaxValues(0)
+		// }
 	}
 
 	const onChangeInputStartHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		let targetVal = parseInt(e.currentTarget.value)
 
-		if (!isNaN(targetVal)) {
-			setStartValues(targetVal)
-			onChangeUpdateStartValues(targetVal)
-		} else {
-			// setStartValues(0)
-			onChangeUpdateStartValues(0)
-		}
+		// if (!isNaN(targetVal)) {
+		setStartValues(targetVal)
+		onChangeUpdateStartValues(targetVal)
+		// } else {
+		// 	// setStartValues(0)
+		// 	onChangeUpdateStartValues(0)
+		// }
 	}
 
 	const textValuesCounterUnCorrectHandler = () => {
