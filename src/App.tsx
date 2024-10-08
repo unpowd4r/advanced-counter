@@ -1,52 +1,39 @@
-import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import './App.css'
 import { CounterMain } from './components/CounterMain'
 import { SetCounterMain } from './components/SetCounterMain'
+import {
+	setEnterValuesAC,
+	setMaxValueAC,
+	setStartValueAC,
+} from './model/counter-reducer'
+import { RootState } from './model/store'
 
 function App() {
-	const [maxValue, setMaxValues] = useState(0)
-	const [startValue, setStartValues] = useState(0)
-	const [enterValues, setEnterValues] = useState('')
-
-	const MAX_VALUE = 'maxValue'
-	const START_VALUE = 'startValue'
-
-	useEffect(() => {
-		let maxValueAsString = localStorage.getItem(MAX_VALUE)
-		if (maxValueAsString) {
-			let newMaxValue = JSON.parse(maxValueAsString)
-			setMaxValues(newMaxValue)
-		}
-	}, [])
-
-	useEffect(() => {
-		let startValueAsString = localStorage.getItem(START_VALUE)
-		if (startValueAsString) {
-			let newStartValue = JSON.parse(startValueAsString)
-			setStartValues(newStartValue)
-		}
-	}, [])
+	const { maxValue, startValue, enterValues, count } = useSelector(
+		(state: RootState) => state
+	)
+	const dispatch = useDispatch()
 
 	const textValuesCounterUnCorrect = () => {
-		setEnterValues("enter values and press 'set'")
+		dispatch(setEnterValuesAC(true))
 	}
 
 	const textValuesOnBlurUnCorrectHandler = () => {
-		setEnterValues('')
+		dispatch(setEnterValuesAC(true))
 	}
 
 	const changeSetHandlerMaxValue = (valueMax: number) => {
-		setMaxValues(valueMax)
-		localStorage.setItem(MAX_VALUE, JSON.stringify(valueMax))
+		dispatch(setMaxValueAC(valueMax))
 	}
 	const changeSetHandlerStartValue = (valueStart: number) => {
-		setStartValues(valueStart)
-		localStorage.setItem(START_VALUE, JSON.stringify(valueStart))
+		dispatch(setStartValueAC(valueStart))
 	}
 
 	return (
 		<div className='App'>
 			<CounterMain
+				count={count}
 				maxValue={maxValue}
 				startValue={startValue}
 				enterValues={enterValues}

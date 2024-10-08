@@ -1,4 +1,6 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { setMaxValueAC, setStartValueAC } from '../model/counter-reducer'
 import { Button } from './Button'
 
 type OnChangeValuesType = {
@@ -8,7 +10,7 @@ type OnChangeValuesType = {
 	textValuesCounterUnCorrect: () => void
 	textValuesOnBlurUnCorrectHandler: () => void
 	setClickedHandler: () => void
-	enterValues: string
+	enterValues: boolean
 	maxValue: number
 	startValue: number
 	clicked: number
@@ -20,49 +22,25 @@ export const InputsValue = ({
 	setUpdateValuesHandler,
 	textValuesCounterUnCorrect,
 	textValuesOnBlurUnCorrectHandler,
-	enterValues,
 	maxValue,
 	startValue,
 	setClickedHandler,
 	clicked,
 }: OnChangeValuesType) => {
-	const [maxValues, setMaxValues] = useState(maxValue)
-	const [startValues, setStartValues] = useState(startValue)
-
-	useEffect(() => {
-		const maxValueFromLocalStorage = localStorage.getItem('maxValue')
-		if (maxValueFromLocalStorage) {
-			setMaxValues(parseInt(maxValueFromLocalStorage))
-		}
-
-		const startValueFromLocalStorage = localStorage.getItem('startValue')
-		if (startValueFromLocalStorage) {
-			setStartValues(parseInt(startValueFromLocalStorage))
-		}
-	}, [])
+	const dispatch = useDispatch()
 
 	const onChangeInputMaxHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		let targetVal = parseInt(e.currentTarget.value)
 
-		// if (!isNaN(targetVal)) {
-		setMaxValues(targetVal)
+		dispatch(setMaxValueAC(targetVal))
 		onChangeUpdateMaxValues(targetVal)
-		// } else {
-		// 	// setMaxValues(0)
-		// 	onChangeUpdateMaxValues(0)
-		// }
 	}
 
 	const onChangeInputStartHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		let targetVal = parseInt(e.currentTarget.value)
 
-		// if (!isNaN(targetVal)) {
-		setStartValues(targetVal)
+		dispatch(setStartValueAC(targetVal))
 		onChangeUpdateStartValues(targetVal)
-		// } else {
-		// 	// setStartValues(0)
-		// 	onChangeUpdateStartValues(0)
-		// }
 	}
 
 	const textValuesCounterUnCorrectHandler = () => {
@@ -72,11 +50,11 @@ export const InputsValue = ({
 
 	const disabledButton =
 		clicked !== 1 &&
-		maxValues > startValues &&
-		maxValues > -1 &&
-		startValues !== maxValues &&
-		startValues > -1 &&
-		startValues !== maxValues
+		maxValue > startValue &&
+		maxValue > -1 &&
+		startValue !== maxValue &&
+		startValue > -1 &&
+		startValue !== maxValue
 
 	return (
 		<>
@@ -85,14 +63,12 @@ export const InputsValue = ({
 					<div className='counter__text'>max value:</div>
 					<input
 						className={
-							maxValues > startValues &&
-							maxValues > -1 &&
-							startValues !== maxValues
+							maxValue > startValue && maxValue > -1 && startValue !== maxValue
 								? 'input__max__value'
 								: 'incorrect-value'
 						}
 						type='number'
-						value={maxValues}
+						value={maxValue}
 						onChange={onChangeInputMaxHandler}
 						onClick={textValuesCounterUnCorrectHandler}
 						onBlur={textValuesOnBlurUnCorrectHandler}
@@ -102,14 +78,14 @@ export const InputsValue = ({
 					<div className='counter__text'>start value:</div>
 					<input
 						className={
-							maxValues > startValues &&
-							startValues > -1 &&
-							startValues !== maxValues
+							maxValue > startValue &&
+							startValue > -1 &&
+							startValue !== maxValue
 								? 'input__start__value'
 								: 'incorrect-value'
 						}
 						type='number'
-						value={startValues}
+						value={startValue}
 						onChange={onChangeInputStartHandler}
 						onClick={textValuesCounterUnCorrectHandler}
 						onBlur={textValuesOnBlurUnCorrectHandler}

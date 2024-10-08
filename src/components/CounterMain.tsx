@@ -1,31 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { v1 } from 'uuid'
+import {
+	incrementCounterAC,
+	InitialStateType,
+	resetCounterAC,
+} from '../model/counter-reducer'
 import { Button } from './Button'
-
-type InputValuesType = {
-	maxValue: number
-	startValue: number
-	enterValues: string
-}
 
 export const CounterMain = ({
 	maxValue,
 	startValue,
 	enterValues,
-}: InputValuesType) => {
-	let [count, setCount] = useState(startValue)
-
-	useEffect(() => {
-		setCount(startValue)
-	}, [startValue])
+	count,
+}: InitialStateType) => {
+	const dispatch = useDispatch()
 
 	const incrementCounter = () => {
 		if (count < maxValue && maxValue !== startValue) {
-			setCount(count + 1)
+			dispatch(incrementCounterAC())
 		}
 	}
 	const resetCounter = () => {
-		setCount(startValue)
+		dispatch(resetCounterAC())
 	}
 
 	const disabledInc = count === maxValue
@@ -50,7 +46,11 @@ export const CounterMain = ({
 		<div className='counter__window'>
 			<div className='counter__background'>
 				<h1 className={count === maxValue ? 'redCounter' : 'count'}>
-					{enterValues === '' ? count : enterValues}
+					{!enterValues ? (
+						count
+					) : (
+						<span className='enterValues'>enter values and press 'set'</span>
+					)}
 				</h1>
 			</div>
 			<div className='buttons__items'>

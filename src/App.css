@@ -222,3 +222,7 @@ input:focus {
 .redCounter {
 	color: rgb(170, 2, 2);
 }
+
+.enterValues {
+	color: rgb(0, 204, 255);
+}

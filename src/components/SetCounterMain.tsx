@@ -1,4 +1,10 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import {
+	setMaxValueAC,
+	setStartValueAC,
+	setValuesAC,
+} from '../model/counter-reducer'
 import { InputsValue } from './InputValue'
 
 type SetValuesType = {
@@ -8,33 +14,30 @@ type SetValuesType = {
 	textValuesOnBlurUnCorrectHandler: () => void
 	maxValue: number
 	startValue: number
-	enterValues: string
+	enterValues: boolean
 }
 
 export const SetCounterMain = ({
-	changeSetHandlerStartValue,
-	changeSetHandlerMaxValue,
 	textValuesCounterUnCorrect,
 	textValuesOnBlurUnCorrectHandler,
-	enterValues,
 	maxValue,
 	startValue,
+	enterValues,
 }: SetValuesType) => {
-	const [valueMax, setValueMax] = useState(0)
-	const [valueStart, setValueStart] = useState(0)
+	const dispatch = useDispatch()
+
 	const [clicked, setClicked] = useState(0)
 
 	const onChangeUpdateMaxValues = (maxValue: number) => {
-		setValueMax(maxValue)
+		dispatch(setMaxValueAC(maxValue))
 	}
 
 	const onChangeUpdateStartValues = (startValue: number) => {
-		setValueStart(startValue)
+		dispatch(setStartValueAC(startValue))
 	}
 
 	const setUpdateValuesHandler = () => {
-		changeSetHandlerMaxValue(valueMax)
-		changeSetHandlerStartValue(valueStart)
+		dispatch(setValuesAC({ maxValue, startValue }))
 		setClicked(1)
 	}
 
